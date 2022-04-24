@@ -3,7 +3,8 @@ import 'package:cnn/views/populer.dart';
 import 'package:cnn/views/login.dart';
 import 'package:cnn/views/home_page.dart';
 import 'package:cnn/views/profil.dart';
-import 'package:cnn/views/populer.dart';
+import 'package:cnn/views/mainPage.dart';
+
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     // jika ingin mengirim argument -> final args = settings.arguments; 
@@ -14,6 +15,8 @@ class RouteGenerator {
         
       case '/home':
         return MaterialPageRoute(builder: (_) => const HomePage(title: "Home",));
+      case '/main':
+        return MaterialPageRoute(builder: (_) => const mainPage());
       case '/':
         return MaterialPageRoute(builder: (_) => const login(title: "login",));
       case '/populer':

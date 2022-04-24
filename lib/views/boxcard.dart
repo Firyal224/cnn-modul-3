@@ -1,14 +1,16 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'data.dart';
-class boxCard extends StatelessWidget {
+class BoxCard extends StatelessWidget {
   final String title;
   final String? time;
   final String picture;
-  boxCard({
+  BoxCard({Key? key, 
     required this.title,
     this.time,
     required this.picture,
-  });
+  }) : super(key: key);
 
 
   @override

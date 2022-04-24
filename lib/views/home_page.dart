@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'cardd.dart';
-import 'boxcard.dart';
+import 'BoxCard.dart';
 import 'data.dart';
 import 'package:cnn/views/populer.dart';
 
@@ -222,22 +222,22 @@ class _HomePageState extends State<HomePage> {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          boxCard(title: "Kolong Kota: Bukan Metropolitan", time: "5 menit", picture: "metropolitan.jpg"),
+                          BoxCard(title: "Kolong Kota: Bukan Metropolitan", time: "5 menit", picture: "metropolitan.jpg"),
                           Padding(
                             padding: const EdgeInsets.only(left:14.0),
-                            child: boxCard(title: "Kolong Kota: Bukan Metropolitan", time: "5 menit", picture: "metropolitan.jpg"),
+                            child: BoxCard(title: "Kolong Kota: Bukan Metropolitan", time: "5 menit", picture: "metropolitan.jpg"),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left:14.0),
-                            child: boxCard(title: "Kolong Kota: Bukan Metropolitan", time: "5 menit", picture: "metropolitan.jpg"),
+                            child: BoxCard(title: "Kolong Kota: Bukan Metropolitan", time: "5 menit", picture: "metropolitan.jpg"),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left:14.0),
-                            child: boxCard(title: "Kolong Kota: Bukan Metropolitan", time: "5 menit", picture: "metropolitan.jpg"),
+                            child: BoxCard(title: "Kolong Kota: Bukan Metropolitan", time: "5 menit", picture: "metropolitan.jpg"),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left:14.0),
-                            child: boxCard(title: "Kolong Kota: Bukan Metropolitan", time: "5 menit", picture: "metropolitan.jpg"),
+                            child: BoxCard(title: "Kolong Kota: Bukan Metropolitan", time: "5 menit", picture: "metropolitan.jpg"),
                           ),
 
                         ],
