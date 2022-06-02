@@ -1,4 +1,4 @@
-package com.example.cnn
+package com.example.cnn_app
 
 import io.flutter.embedding.android.FlutterActivity
 

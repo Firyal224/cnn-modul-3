@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "373728401280",
+    "project_id": "cnn-app-969d6",
+    "storage_bucket": "cnn-app-969d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373728401280:android:b5c4148603688ce9549365",
+        "android_client_info": {
+          "package_name": "com.example.cnn_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373728401280-fskiep2isaqg8mlqsp97ip8pghev8i7v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAXlaFIwqNVUmQ1W3IUptkyCk0jSpATF8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373728401280-fskiep2isaqg8mlqsp97ip8pghev8i7v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

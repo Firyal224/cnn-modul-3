@@ -1,4 +1,4 @@
-# cnn
+# cnn_app
 
 A new Flutter project.
 

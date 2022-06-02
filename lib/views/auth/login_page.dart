@@ -1,14 +1,37 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: avoid_function_literals_in_foreach_calls, prefer_const_constructors_in_immutables
 
-class login extends StatefulWidget {
-  final String title;
-  const login({Key? key, required this.title,}) : super(key: key);
+import 'package:cnn_app/model/dummy_data.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class LoginPage extends StatefulWidget {
+  LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<login> createState() => _loginState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _loginState extends State<login> {
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController usenameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+
+  Future validateLogin() async {
+  final prefs = await SharedPreferences.getInstance();
+   DummyData.data.forEach((element) async {
+     if(element["username"] == usenameController.text && element["password"] == passwordController.text){
+       if(element.isNotEmpty){
+         prefs.setBool("isLogin", true);
+         prefs.setString("nama", element["nama"].toString());
+         prefs.setString("nim", element["Nim"].toString());
+         Navigator.pushNamed(context, "/mainPage");
+       } else {
+         debugPrint("NO HAVE DATA");
+       }
+     } 
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +40,7 @@ class _loginState extends State<login> {
         padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,  
           children: <Widget>[
             const Text(
               'Sign in',
@@ -34,8 +57,9 @@ class _loginState extends State<login> {
                 children: [
                   TextFormField(
                     maxLines: 1,
+                    controller: usenameController,
                     decoration: InputDecoration(
-                      hintText: 'Enter your email',
+                      hintText: 'Enter your username',
                       prefixIcon  : const Icon(Icons.email),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -53,7 +77,8 @@ class _loginState extends State<login> {
                       return null;
                     },
                     maxLines: 1,
-                    obscureText: true,
+                    obscureText: false,
+                    controller: passwordController,
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.lock),
                       hintText: 'Enter your password',
@@ -62,13 +87,14 @@ class _loginState extends State<login> {
                       ),
                     ),
                   ),
-
                   const SizedBox(
                     height: 20,
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/profil');
+                    onPressed: () async  {
+                     validateLogin().then((value) {
+                       
+                     });
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),

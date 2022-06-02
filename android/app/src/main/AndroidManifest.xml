@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cnn">
+    package="com.example.cnn_app">
    <application
-        android:label="cnn"
+        android:label="cnn_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

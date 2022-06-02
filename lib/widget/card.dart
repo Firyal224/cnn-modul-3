@@ -1,13 +1,16 @@
+// ignore_for_file: use_key_in_widget_constructors
+
+import 'package:cnn_app/model/data.dart';
 import 'package:flutter/material.dart';
-import 'data.dart';
-class cardd extends StatelessWidget {
+
+class CardCustom extends StatelessWidget {
   final String title;
-  final String? time;
+  final String time;
   final String picture;
 
-  cardd({
+  const CardCustom({
     required this.title,
-    this.time,
+    required this.time,
     required this.picture,
 
   });
@@ -16,9 +19,9 @@ class cardd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Data data = Data(
-        title: title,
-        time: time,
-        picture: picture
+      title: title,
+      time: time,
+      picture: picture
     );
     return Container(
       width: double.infinity,
@@ -31,7 +34,7 @@ class cardd extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: <Widget>[
-            Container(
+            SizedBox(
               width: 130,
               child:GestureDetector(child:
               Image.asset('assets/'+data.getPicture(), width: 130)),
@@ -39,14 +42,14 @@ class cardd extends StatelessWidget {
             Expanded(
               child: Container(
                 alignment: Alignment.topLeft,
-                margin: EdgeInsets.only(bottom: 25.0),
+                margin: const EdgeInsets.only(bottom: 25.0),
                 width: 220,
                 child: Column(
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left:10.0,top: 2.0,bottom: 3.0),
                       child: Text(data.getTitle(),   maxLines: 2,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18.0, color: Colors.black, fontWeight: FontWeight.bold,
                         ),
                       ),
