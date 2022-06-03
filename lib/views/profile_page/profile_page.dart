@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:cnn_app/main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatelessWidget {
   final String nama;
@@ -124,25 +124,8 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                       trailing: Icon(Icons.logout, size: 26,),
-                      onTap: () async {
-                        SharedPreferences preferences = await SharedPreferences.getInstance();
-                          await preferences.clear();
-                            Navigator.pushAndRemoveUntil(
-                            context,
-                            PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                                Animation secondaryAnimation) {
-                              return SplashScreen();
-                            }, transitionsBuilder: (BuildContext context, Animation<double> animation,
-                                Animation<double> secondaryAnimation, Widget child) {
-                              return  SlideTransition(
-                                position:  Tween<Offset>(
-                                  begin: const Offset(1.0, 0.0),
-                                  end: Offset.zero,
-                                ).animate(animation),
-                                child: child,
-                              );
-                            }),
-                          (Route route) => false);
+                      onTap: ()  {
+                        FirebaseAuth.instance.signOut();
                       },
                     ),
                   ),

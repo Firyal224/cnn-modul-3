@@ -42,14 +42,6 @@ class _LoginPageState extends State<LoginPage> {
     }on FirebaseAuthException catch (e){
         print(e);
     }
-
-    // FirebaseAuth.instance.authStateChanges().listen((User? user) {
-    //   if (user == null) {
-    //     Navigator.pushNamed(context, "/login");
-    //   } else {
-    //     Navigator.pushNamed(context, "/mainPage");
-    //   }
-    // });
   }
   @override
   Widget build(BuildContext context) {
