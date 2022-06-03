@@ -1,6 +1,8 @@
 // ignore_for_file: avoid_function_literals_in_foreach_calls, prefer_const_constructors_in_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cnn_app/model/dummy_data.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,6 +34,21 @@ class _RegisterPageState extends State<RegisterPage> {
     });
   }
 
+   Future signup() async{
+    try{
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: usenameController.text.trim(), 
+      password: passwordController.text.trim()
+      );
+
+      await FirebaseFirestore.instance.collection('users').add({
+        'email': usenameController.text.trim(),
+        'name':  nameController.text.trim()
+      });
+    }on FirebaseAuthException catch (e){
+        print(e);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +123,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   ElevatedButton(
                     onPressed: () async  {
-                     
+                      signup();
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),

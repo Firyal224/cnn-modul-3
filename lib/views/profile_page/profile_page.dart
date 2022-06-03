@@ -1,6 +1,4 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
-import 'package:cnn_app/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -9,8 +7,10 @@ class ProfilePage extends StatelessWidget {
   final String nim;
   const ProfilePage({Key? key, required this.nama, required this.nim}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile"),
@@ -39,7 +39,26 @@ class ProfilePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text( nama ,
+                      Text( 
+                        // SharedPreferences preferences = await SharedPreferences.getInstance();
+                        //   await preferences.clear();
+                        //     Navigator.pushAndRemoveUntil(
+                        //     context,
+                        //     PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                        //         Animation secondaryAnimation) {
+                        //       return SplashScreen();
+                        //     }, transitionsBuilder: (BuildContext context, Animation<double> animation,
+                        //         Animation<double> secondaryAnimation, Widget child) {
+                        //       return  SlideTransition(
+                        //         position:  Tween<Offset>(
+                        //           begin: const Offset(1.0, 0.0),
+                        //           end: Offset.zero,
+                        //         ).animate(animation),
+                        //         child: child,
+                        //       );
+                        //     }),
+                        //   (Route route) => false);
+                        user.email! ,
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold
