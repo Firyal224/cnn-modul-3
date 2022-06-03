@@ -1,23 +1,22 @@
 // ignore_for_file: avoid_function_literals_in_foreach_calls, prefer_const_constructors_in_immutables
 
 import 'package:cnn_app/model/dummy_data.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  RegisterPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   TextEditingController usenameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
 
-
-  Future validateLogin() async {
+  Future validateRegister() async {
   final prefs = await SharedPreferences.getInstance();
    DummyData.data.forEach((element) async {
      if(element["username"] == usenameController.text && element["password"] == passwordController.text){
@@ -33,24 +32,6 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  Future login() async{
-    try{
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: usenameController.text.trim(), 
-      password: passwordController.text.trim()
-      );
-    }on FirebaseAuthException catch (e){
-        print(e);
-    }
-
-    // FirebaseAuth.instance.authStateChanges().listen((User? user) {
-    //   if (user == null) {
-    //     Navigator.pushNamed(context, "/login");
-    //   } else {
-    //     Navigator.pushNamed(context, "/mainPage");
-    //   }
-    // });
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.center,  
           children: <Widget>[
             const Text(
-              'Sign in',
+              'Sign Up',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 40,
@@ -76,9 +57,23 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   TextFormField(
                     maxLines: 1,
+                    controller: nameController,
+                    decoration: InputDecoration(
+                      hintText: 'Enter your name',
+                      prefixIcon  : const Icon(Icons.people_alt),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    maxLines: 1,
                     controller: usenameController,
                     decoration: InputDecoration(
-                      hintText: 'Enter your username',
+                      hintText: 'Enter your email',
                       prefixIcon  : const Icon(Icons.email),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -111,13 +106,13 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   ElevatedButton(
                     onPressed: () async  {
-                     login();
+                     
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),
                     ),
                     child: const Text(
-                      'Sign in',
+                      'Register',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -129,18 +124,16 @@ class _LoginPageState extends State<LoginPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Not registered yet?'),
+                      const Text('Have Account ?'),
                       TextButton(
                         onPressed: () {
 
                         },
-
-                        
-                        child: GestureDetector(
-                          onTap: () =>  Navigator.pushNamed(context, "/register"),
+                        child:GestureDetector(
+                          onTap: () =>  Navigator.pushNamed(context, "/login"),
                           child: 
                           const Text(
-                            'Create an account'
+                            'Login'
                             )
                           ),
                       ),

@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
 
+import 'dart:async';
+
 import 'package:cnn_app/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async{
@@ -32,15 +34,16 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2),() async {
-    final prefs = await SharedPreferences.getInstance(); 
-       if(prefs.getBool("isLogin") == true){
-         Navigator.pushNamed(context, "/mainPage");
-       } else {
-         Navigator.pushNamed(context, "/login");
-       }
-    });
     super.initState();
+    Timer(Duration(seconds: 3),(){
+        FirebaseAuth.instance.userChanges().listen((user) {
+            if(user == null){
+               Navigator.pushNamed(context, "/login");
+            }else{
+              Navigator.pushNamed(context, "/mainPage");
+            }
+        });
+    });
   }
 
 
