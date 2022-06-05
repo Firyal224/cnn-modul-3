@@ -136,7 +136,9 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         indicatorColor: Colors.grey.withOpacity(0.1),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.red.withOpacity(0.9),
         onPressed: ()=> showNotification(),
+        child: Icon(Icons.notifications, color:Colors.white, size: 32),
       ),
     );
   }
