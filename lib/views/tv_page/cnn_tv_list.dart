@@ -107,7 +107,20 @@ Widget tvCard(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image.asset('assets/metropolitan.jpg',),
+            Stack(
+              children: [
+                Image.asset('assets/metropolitan.jpg',),
+                Positioned(
+                  left: 0, right: 0, bottom: 100,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.grey[400],
+                    radius: 50.0,
+                     child: Icon(Icons.play_arrow_rounded, size: 70, color: Colors.black.withOpacity(0.6),),
+                    
+                  ),
+                )
+              ],
+            ),
             Text(tvTitle,
               style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold,color: Colors.black),
             ),
