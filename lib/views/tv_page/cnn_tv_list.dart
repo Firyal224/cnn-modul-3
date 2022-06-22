@@ -25,9 +25,9 @@ class TvListPage extends StatelessWidget {
         return ListView(
           padding: const EdgeInsets.all(20.0),
           children: tvListProviders.tvListProvider.isNotEmpty
-              ?  tvListProviders.tvListProvider.map((title){
+              ?  tvListProviders.tvListProvider.map((data){
                 return Dismissible(
-                  key: Key(title.id),
+                  key: Key(data.id),
                   background: Container(
                     color: Colors.red.shade300,
                     child: const Center(
@@ -39,13 +39,13 @@ class TvListPage extends StatelessWidget {
                     child: Column(
                       children: [
                         tvCard(
-                          tvTitle: title.title,
-                          duration: title.duration,
+                          tvTitle: data.title,
+                          duration: data.duration,
                           onPress: (){
                             showDialog(
                               context: context,
                               builder: (context){
-                                return AddEditListTv(judul: "Edit", title: title);
+                                return AddEditListTv(judul: "Edit", tvModel: data);
                             });
                           }
                         )
@@ -56,7 +56,7 @@ class TvListPage extends StatelessWidget {
                     Provider.of<TvListProvider>(
                       context,
                       listen: false,
-                      ).removeTvList(title);
+                      ).removeTvList(data);
                   },
                 );
           }).toList()

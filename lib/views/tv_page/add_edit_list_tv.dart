@@ -10,11 +10,11 @@ import 'package:uuid/uuid.dart';
 class AddEditListTv extends StatelessWidget {
   //const AddEditComTvicRating({Key? key}) : super(key: key);
   final String judul;
-  final TvModel? title;
+  final TvModel? tvModel;
   const AddEditListTv({
     Key? key,
     required this.judul,
-    this.title,
+    this.tvModel,
   }) : super(key: key);
 
 
@@ -23,8 +23,9 @@ class AddEditListTv extends StatelessWidget {
     TextEditingController _titleTvController = TextEditingController();
     TextEditingController _durationTvController = TextEditingController();
 
-    if (title != null){
-      _titleTvController.text = title!.title;
+    if (tvModel != null){
+      _titleTvController.text = tvModel!.title;
+      _durationTvController.text = tvModel!.duration;
     }
 
     return AlertDialog(
@@ -90,10 +91,10 @@ class AddEditListTv extends StatelessWidget {
                     );
                   },);
               } else {
-                if(title != null ){
+                if(tvModel != null ){
                   Provider.of<TvListProvider>(context, listen: false).updateTvList(
                     TvModel(
-                        id: title!.id,
+                        id: tvModel!.id,
                         title: _titleTvController.text,
                         duration: _durationTvController.text,
                         )
