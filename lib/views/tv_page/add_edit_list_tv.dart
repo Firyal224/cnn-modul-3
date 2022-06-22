@@ -71,16 +71,25 @@ class AddEditListTv extends StatelessWidget {
             child: const Text("Cancel", style: TextStyle(color: Colors.red),)),
         TextButton(
             onPressed: (){
-              if(_titleTvController.text.isEmpty){
+              if(_titleTvController.text == ""){
                 showDialog(
                     context: context,
                     builder: (context){
                       return const InfoWidget(
                         title: "Error",
-                        content: "Data tidak boleh kosong!"
+                        content: "Judul tidak boleh kosong!"
                       );
                     },);
-              }else{
+              } else if(_durationTvController.text == ""){
+                showDialog(
+                  context: context,
+                  builder: (context){
+                    return const InfoWidget(
+                      title: "Error",
+                      content: "Durasi tidak boleh kosong!"
+                    );
+                  },);
+              } else {
                 if(title != null ){
                   Provider.of<TvListProvider>(context, listen: false).updateTvList(
                     TvModel(
