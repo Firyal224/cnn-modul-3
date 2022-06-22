@@ -1,9 +1,8 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, unused_import
 
 import 'dart:async';
-
-import 'package:cnn_app/ListBerita/ListBeritaProvider.dart';
 import 'package:cnn_app/routes/routes.dart';
+import 'package:cnn_app/services/tv_list_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +43,7 @@ void main() async{
  runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ListBeritaProvider()),
+        ChangeNotifierProvider(create: (_) => TvListProvider()),
       ],
       child: const MyApp(),
     ),

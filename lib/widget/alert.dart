@@ -1,11 +1,9 @@
-// ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
 
-class infoWidget extends StatelessWidget {
+class InfoWidget extends StatelessWidget {
   final String title;
   final String content;
-  const infoWidget({
+  const InfoWidget({
     Key? key,
     required this.title,
     required this.content,

@@ -3,7 +3,7 @@
 import 'package:cnn_app/main.dart';
 import 'package:cnn_app/views/home_page/home_page.dart';
 import 'package:cnn_app/views/profile_page/profile_page.dart';
-import 'package:cnn_app/views/tv_page/tv_page.dart';
+import 'package:cnn_app/views/tv_page/cnn_tv_list.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -97,18 +97,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   }
 
 
-    void showNotification() {
-    flutterLocalNotificationsPlugin.show(
-      0,
-      "Apa gitu",
-      "Hayo ngapain ?",
-      NotificationDetails(
-        android: AndroidNotificationDetails(channel.id, channel.name, channelDescription: channel.description,
-            importance: Importance.high,
-            color: Colors.blue,
-            playSound: true,
-            icon: '@mipmap/ic_launcher')));
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +109,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
           controller: _tabController,
           children:  [
             HomePage(),
-            TvPage(),
+            TvListPage(),
             ProfilePage(
               nama: preferences.getString("nama").toString(),
               nim: preferences.getString("nim").toString(),
@@ -134,11 +123,6 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         controller: _tabController,
         tabs: list, 
         indicatorColor: Colors.grey.withOpacity(0.1),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.red.withOpacity(0.9),
-        onPressed: ()=> showNotification(),
-        child: Icon(Icons.notifications, color:Colors.white, size: 32),
       ),
     );
   }

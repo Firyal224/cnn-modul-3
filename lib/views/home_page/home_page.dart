@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cnn_app/main.dart';
 import 'package:cnn_app/views/home_page/home_appbar_page.dart';
 import 'package:cnn_app/views/home_page/populer_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,6 +14,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+   void showNotification() {
+    flutterLocalNotificationsPlugin.show(
+      0,
+      "Apa gitu",
+      "Hayo ngapain ?",
+      NotificationDetails(
+      android: AndroidNotificationDetails(channel.id, channel.name, channelDescription: channel.description,
+          importance: Importance.high,
+          color: Colors.blue,
+          playSound: true,
+          icon: '@mipmap/ic_launcher')));
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -58,6 +74,11 @@ class _HomePageState extends State<HomePage> {
               HomeAppBar(),
               PopulerAppBar(),
             ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.red.withOpacity(0.9),
+            onPressed: ()=> showNotification(),
+            child: Icon(Icons.notifications, color:Colors.white, size: 32),
           ),
         ),
       ),
