@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, unused_import
 
 import 'dart:async';
 
+import 'package:cnn_app/ListBerita/ListBeritaProvider.dart';
 import 'package:cnn_app/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:cnn_app/tes.dart';
+import 'package:provider/provider.dart';
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
     'High Importance Notifications', // title
@@ -39,17 +41,35 @@ void main() async{
     badge: true,
     sound: true,
   );
-  runApp(const MaterialApp(
-    title: "CNN INDONESIA",
+ runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ListBeritaProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
+}
 
-    //  debugShowCheckedModeBanner -> digunakan untuk menonaktifkan tulisan mode DEBUG
 
-    debugShowCheckedModeBanner: false,
 
-    // onGenerateRoute -> digunakan untuk menginisialisasikan routing saat aplikasi pertama kali dijalankan
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
-    onGenerateRoute: RouteGenerator.generateRoute,
-  ));
+  @override
+  Widget build(BuildContext context) {
+      return const MaterialApp(
+        title: "CNN INDONESIA",
+
+      //  debugShowCheckedModeBanner -> digunakan untuk menonaktifkan tulisan mode DEBUG
+
+      debugShowCheckedModeBanner: false,
+
+      // onGenerateRoute -> digunakan untuk menginisialisasikan routing saat aplikasi pertama kali dijalankan
+
+      onGenerateRoute: RouteGenerator.generateRoute,
+    );
+  }
 }
 
 
@@ -59,6 +79,9 @@ class SplashScreen extends StatefulWidget {
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
+
+
+
 
 class _SplashScreenState extends State<SplashScreen> {
   @override

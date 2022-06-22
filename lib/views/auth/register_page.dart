@@ -46,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
         'name':  nameController.text.trim()
       });
     }on FirebaseAuthException catch (e){
-        print(e);
+        debugPrint("$e");
     }
   }
   @override
