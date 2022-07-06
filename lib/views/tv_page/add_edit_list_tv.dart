@@ -52,6 +52,7 @@ class AddEditListTv extends StatelessWidget {
               controller: _durationTvController,
               textCapitalization: TextCapitalization.sentences,
               style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 border: InputBorder.none,
                 filled: true,
