@@ -76,11 +76,11 @@ class _HomePageState extends State<HomePage> {
               TerUpdatePage()
             ],
           ),
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.red.withOpacity(0.9),
-            onPressed: ()=> showNotification(),
-            child: Icon(Icons.notifications, color:Colors.white, size: 32),
-          ),
+          //  floatingActionButton: FloatingActionButton(
+          //   backgroundColor: Colors.red.withOpacity(0.9),
+          //   onPressed: ()=> showNotification(),
+          //   child: Icon(Icons.notifications, color:Colors.white, size: 32),
+          // ),
         ),
       ),
     );

@@ -154,9 +154,10 @@ class ApiServices {
     Map<String, dynamic>? parameters,
   }) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    // String tokenType = preferences.getString(SessionKey.tokenType)!;
-    // String accessToken = preferences.getString(SessionKey.accessToken)!;
-    //String tokenTypeWithAccessToken = "$tokenType $accessToken";
+
+    String tokenType = SessionKey.tokenType;
+    String accessToken =  preferences.getString("access_token")!;
+    String tokenTypeWithAccessToken = "$tokenType $accessToken";
 
     //initializing Dio
     Dio dio = Dio();
@@ -164,11 +165,12 @@ class ApiServices {
       client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
       return client;
     };
+    print(tokenTypeWithAccessToken);
 
     dio.options.baseUrl = ApiUrl.baseUrl;
     dio.options.connectTimeout = AppInformation.connectTimeout;
     dio.options.receiveTimeout = AppInformation.receiveTimeout;
-    dio.options.headers["Authorization"] = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTAuMC4yLjI6ODAwMC9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTY1NzE0NTEyMSwiZXhwIjoxNjU3MTQ4NzIxLCJuYmYiOjE2NTcxNDUxMjEsImp0aSI6IkFJNFFXaUlkQXlaNWRqSU4iLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Z3KXN-w8jYQJMv_WockZqjal9DXxDJVGfkaPmcV6cCw";
+    dio.options.headers["Authorization"] = tokenTypeWithAccessToken;
     try {
       Response response = await dio.get(
         url,
@@ -266,8 +268,8 @@ class ApiServices {
     required bool isJson,
   }) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    String tokenType = preferences.getString(SessionKey.tokenType)!;
-    String accessToken = preferences.getString(SessionKey.accessToken)!;
+    String tokenType = SessionKey.tokenType;
+    String accessToken =  preferences.getString("access_token")!;
     String tokenTypeWithAccessToken = "$tokenType $accessToken";
 
     //initializing Dio
@@ -400,4 +402,40 @@ class ApiServices {
       }
     }
   }
+
+  Future deleteWithtoken({
+    required String url,
+  }) async {
+     SharedPreferences preferences = await SharedPreferences.getInstance();
+    String tokenType = SessionKey.tokenType;
+    String accessToken =  preferences.getString("access_token")!;
+    String tokenTypeWithAccessToken = "$tokenType $accessToken";
+
+    //initializing Dio
+    Dio dio = Dio();
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
+      client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+
+    dio.options.baseUrl = ApiUrl.baseUrl;
+    dio.options.connectTimeout = AppInformation.connectTimeout;
+    dio.options.receiveTimeout = AppInformation.receiveTimeout;
+
+    //add header dio authorization
+    dio.options.headers["Authorization"] = tokenTypeWithAccessToken;
+    dio.options.headers["Content-Type"] = Headers.jsonContentType;
+    dio.options.headers["Accept"] = "application/json";
+
+    //initializing response
+     try {
+       Response response = await dio.delete(
+        url,
+       );
+       print(response);
+     } on DioError catch (e) {
+      print(e);
+     }
+  }
+
 }

@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
        ApiServices apiServices = ApiServices();
        SharedPreferences prefs = await SharedPreferences.getInstance();
         await apiServices.postData (
-        url: ApiUrl.loginauth, 
+        url: "http://192.168.1.45:8000/api/auth/login", 
         parameters: {
         "email" : "admin@gmail.com",
         "password" : "admin123"
@@ -53,8 +53,7 @@ class _LoginPageState extends State<LoginPage> {
         isJson: true,
       ).then((value){
         Future.delayed(Duration(milliseconds: 100),(){
-          prefs.setString(SessionKey.tokenType, "Bearer");
-          prefs.setString(SessionKey.accessToken, value.data["access_token"].toString());
+          prefs.setString("access_token", "${value.data["access_token"]}");
           print(value.data["access_token"]);
         });
       
