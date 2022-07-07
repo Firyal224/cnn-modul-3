@@ -1,6 +1,9 @@
-// ignore_for_file: avoid_function_literals_in_foreach_calls, prefer_const_constructors_in_immutables
+// ignore_for_file: avoid_function_literals_in_foreach_calls, prefer_const_constructors_in_immutables, avoid_print, unnecessary_string_interpolations
 
+import 'package:cnn_app/api_url.dart';
 import 'package:cnn_app/model/dummy_data.dart';
+import 'package:cnn_app/services/api_services.dart';
+import 'package:cnn_app/session_key.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,6 +42,23 @@ class _LoginPageState extends State<LoginPage> {
       email: usenameController.text.trim(), 
       password: passwordController.text.trim()
       );
+       ApiServices apiServices = ApiServices();
+       SharedPreferences prefs = await SharedPreferences.getInstance();
+        await apiServices.postData (
+        url: ApiUrl.loginauth, 
+        parameters: {
+        "email" : "admin@gmail.com",
+        "password" : "admin123"
+        }, 
+        isJson: true,
+      ).then((value){
+        Future.delayed(Duration(milliseconds: 100),(){
+          prefs.setString(SessionKey.tokenType, "Bearer");
+          prefs.setString(SessionKey.accessToken, value.data["access_token"].toString());
+          print(value.data["access_token"]);
+        });
+      
+      });
     }on FirebaseAuthException catch (e){
         debugPrint("$e");
     }

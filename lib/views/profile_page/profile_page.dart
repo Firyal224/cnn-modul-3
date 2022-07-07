@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'package:cnn_app/session_key.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -109,6 +110,9 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                        trailing: Icon(Icons.star),
+                       onTap: (){
+                        print(SessionKey.accessToken);
+                       },
                     ),
                   ),
                   Divider(),

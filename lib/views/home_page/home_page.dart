@@ -3,6 +3,7 @@
 import 'package:cnn_app/main.dart';
 import 'package:cnn_app/views/home_page/home_appbar_page.dart';
 import 'package:cnn_app/views/home_page/populer_appbar.dart';
+import 'package:cnn_app/views/home_page/terupdate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -61,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                 Tab(text: "Home",),
                 Tab(text: "Fokus",),
                 Tab(text: "Populer",),
-                Tab(text: "Nasional",),
+                Tab(text: "TerUpdate",),
 
               ],
             )
@@ -72,7 +73,7 @@ class _HomePageState extends State<HomePage> {
               HomeAppBar(),
               PopulerAppBar(),
               HomeAppBar(),
-              PopulerAppBar(),
+              TerUpdatePage()
             ],
           ),
           floatingActionButton: FloatingActionButton(

@@ -154,9 +154,9 @@ class ApiServices {
     Map<String, dynamic>? parameters,
   }) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    String tokenType = preferences.getString(SessionKey.tokenType)!;
-    String accessToken = preferences.getString(SessionKey.accessToken)!;
-    String tokenTypeWithAccessToken = "$tokenType $accessToken";
+    // String tokenType = preferences.getString(SessionKey.tokenType)!;
+    // String accessToken = preferences.getString(SessionKey.accessToken)!;
+    //String tokenTypeWithAccessToken = "$tokenType $accessToken";
 
     //initializing Dio
     Dio dio = Dio();
@@ -168,7 +168,7 @@ class ApiServices {
     dio.options.baseUrl = ApiUrl.baseUrl;
     dio.options.connectTimeout = AppInformation.connectTimeout;
     dio.options.receiveTimeout = AppInformation.receiveTimeout;
-    dio.options.headers["Authorization"] = tokenTypeWithAccessToken;
+    dio.options.headers["Authorization"] = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTAuMC4yLjI6ODAwMC9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTY1NzE0NTEyMSwiZXhwIjoxNjU3MTQ4NzIxLCJuYmYiOjE2NTcxNDUxMjEsImp0aSI6IkFJNFFXaUlkQXlaNWRqSU4iLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Z3KXN-w8jYQJMv_WockZqjal9DXxDJVGfkaPmcV6cCw";
     try {
       Response response = await dio.get(
         url,
@@ -181,15 +181,9 @@ class ApiServices {
         ),
       );
       if (response.statusCode == 200) {
-        return {
-          "response": response,
-          "message": "success",
-        };
+        return response;
       } else {
-        return {
-          "response": response,
-          "message": "failed",
-        };
+        return "Eror";
       }
     } on DioError catch (e) {
       if (e.type == DioErrorType.connectTimeout) {

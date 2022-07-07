@@ -1,7 +1,10 @@
 // ignore_for_file: avoid_function_literals_in_foreach_calls, prefer_const_constructors_in_immutables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cnn_app/api_url.dart';
 import 'package:cnn_app/model/dummy_data.dart';
+import 'package:cnn_app/services/api_services.dart';
+import 'package:cnn_app/session_key.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,6 +47,20 @@ class _RegisterPageState extends State<RegisterPage> {
       await FirebaseFirestore.instance.collection('users').add({
         'email': usenameController.text.trim(),
         'name':  nameController.text.trim()
+      });
+      ApiServices apiServices = ApiServices();
+        await apiServices.postData (
+        url: ApiUrl.loginauth, 
+        parameters: {
+        "email" : "admin@gmail.com",
+        "password" : "admin123"
+        }, 
+        isJson: true,
+      ).then((value) async {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString(SessionKey.tokenType, "Bearer");
+        prefs.setString(SessionKey.accessToken, value.data["access_token"]);
+      
       });
     }on FirebaseAuthException catch (e){
         debugPrint("$e");
