@@ -1,9 +1,7 @@
 // ignore_for_file: avoid_function_literals_in_foreach_calls, prefer_const_constructors_in_immutables, avoid_print, unnecessary_string_interpolations
 
-import 'package:cnn_app/api_url.dart';
 import 'package:cnn_app/model/dummy_data.dart';
 import 'package:cnn_app/services/api_services.dart';
-import 'package:cnn_app/session_key.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';

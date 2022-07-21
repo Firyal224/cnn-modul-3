@@ -1,9 +1,6 @@
-// ignore_for_file: unnecessary_string_interpolations
-
 import 'package:cnn_app/api_url.dart';
 import 'package:cnn_app/services/api_services.dart';
 import 'package:cnn_app/widget/alert.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class TerUpdatePage extends StatefulWidget {
