@@ -1,3 +1,5 @@
+// ignore_for_file: unused_catch_clause
+
 import 'dart:io';
 
 import 'package:cnn_app/api_url.dart';
@@ -57,19 +59,26 @@ class ApiServices {
     dio.options.baseUrl = ApiUrl.baseUrl;
     dio.options.connectTimeout = AppInformation.connectTimeout;
     dio.options.receiveTimeout = AppInformation.receiveTimeout;
-
-    //initializing response
-    Response response = await dio.post(
-      url,
-      data: isJson ? parameters : FormData.fromMap(parameters),
-      options: Options(
-        followRedirects: false,
-        validateStatus: (status) {
-          return status! < 500;
-        },
-      ),
-    );
-    return response;
+    
+    try {
+        //initializing response
+      Response response = await dio.post(
+        url,
+        data: isJson ? parameters : FormData.fromMap(parameters),
+        options: Options(
+          followRedirects: false,
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+      return response;
+      
+    }  on DioError catch (e)  {
+      Response? response;
+      return response!.data["$e"];
+    }
+  
   }
 
   Future<Response> postDataWithToken({
@@ -272,7 +281,7 @@ class ApiServices {
     String accessToken =  preferences.getString("access_token")!;
     String tokenTypeWithAccessToken = "$tokenType $accessToken";
 
-    //initializing Dio
+    
     Dio dio = Dio();
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
       client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;

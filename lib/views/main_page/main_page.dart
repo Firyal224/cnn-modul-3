@@ -110,10 +110,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
           children:  [
             HomePage(),
             TvListPage(),
-            ProfilePage(
-              nama: preferences.getString("nama").toString(),
-              nim: preferences.getString("nim").toString(),
-            ),
+            ProfilePage(),
           ]
         ),
       ),

@@ -3,7 +3,6 @@
 import 'package:cnn_app/api_url.dart';
 import 'package:cnn_app/services/api_services.dart';
 import 'package:cnn_app/widget/alert.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class TerUpdatePage extends StatefulWidget {
@@ -213,7 +212,7 @@ class _TerUpdatePageState extends State<TerUpdatePage> {
   Future addBerita() async {
     ApiServices apiServices = ApiServices();
     await apiServices.postDataWithTokenV2(
-      url: "http://192.168.1.45:8000/api/v1/admin/store", 
+      url: ApiUrl.baseUrl + "v1/admin/store", 
       parameters: {
         "judul" : judulController.text,
         "konten" : kontenController.text,
@@ -226,7 +225,7 @@ class _TerUpdatePageState extends State<TerUpdatePage> {
   Future delteBerita(int id) async {
     ApiServices apiServices = ApiServices();
     await apiServices.deleteWithtoken(
-      url: "http://192.168.1.45:8000/api/v1/admin/delete/$id"
+      url: ApiUrl.baseUrl + "v1/admin/delete/$id"
     ).then((value) {
       print(value);
     });

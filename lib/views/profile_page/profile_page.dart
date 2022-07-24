@@ -2,16 +2,34 @@
 import 'package:cnn_app/session_key.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfilePage extends StatelessWidget {
-  final String nama;
-  final String nim;
-  const ProfilePage({Key? key, required this.nama, required this.nim}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  String email = "";
+
+  @override
+  void initState(){
+    init();
+    super.initState();
+  }
+
+  Future init() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      email =  prefs.getString("email")!;
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile"),
@@ -59,15 +77,10 @@ class ProfilePage extends StatelessWidget {
                         //       );
                         //     }),
                         //   (Route route) => false);
-                        user.email! ,
+                       email,
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold
-                        ),
-                      ),
-                      Text(nim,
-                        style: TextStyle(
-                          fontSize: 18
                         ),
                       ),
                     ],

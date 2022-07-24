@@ -3,5 +3,5 @@ class SessionKey {
   
   static String isLoggedIn = "is_logged_in";
   static String tokenType = "Bearer";
-  static String accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTkyLjE2OC4xLjQ1OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2NTcxNjUxODEsImV4cCI6MTY1NzE2ODc4MSwibmJmIjoxNjU3MTY1MTgxLCJqdGkiOiI3ZFk2ckc3MHdEZFZ3OGVOIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.UAaRUHMTq9bwBQ62cXRbflPf2TUFQAZA0p7cbE1k1t8";
+  static String accessToken = "";
 }

@@ -3,7 +3,7 @@
 import 'package:cnn_app/api_url.dart';
 import 'package:cnn_app/model/dummy_data.dart';
 import 'package:cnn_app/services/api_services.dart';
-import 'package:cnn_app/session_key.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,7 +28,6 @@ class _LoginPageState extends State<LoginPage> {
          prefs.setBool("isLogin", true);
          prefs.setString("nama", element["nama"].toString());
          prefs.setString("nim", element["Nim"].toString());
-         Navigator.pushNamed(context, "/mainPage");
        } else {
          debugPrint("NO HAVE DATA");
        }
@@ -44,17 +43,20 @@ class _LoginPageState extends State<LoginPage> {
       );
        ApiServices apiServices = ApiServices();
        SharedPreferences prefs = await SharedPreferences.getInstance();
-        await apiServices.postData (
-        url: "http://192.168.1.45:8000/api/auth/login", 
+        await apiServices.postDataV2 (
+        url: ApiUrl.loginauth, 
         parameters: {
         "email" : "admin@gmail.com",
         "password" : "admin123"
         }, 
         isJson: true,
       ).then((value){
-        Future.delayed(Duration(milliseconds: 100),(){
-          prefs.setString("access_token", "${value.data["access_token"]}");
-          print(value.data["access_token"]);
+        Future.delayed(Duration(milliseconds: 100),() async {
+          final Response res = value["response"];
+          print(res.data["access_token"]);
+          prefs.setString("access_token", "${res.data["access_token"]}");
+          prefs.setString("email", FirebaseAuth.instance.currentUser!.email.toString());
+          Navigator.pushNamed(context, "/mainPage");
         });
       
       });

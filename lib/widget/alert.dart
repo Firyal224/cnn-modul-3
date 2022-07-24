@@ -1,3 +1,4 @@
+import 'package:cnn_app/api_url.dart';
 import 'package:cnn_app/services/api_services.dart';
 import 'package:flutter/material.dart';
 
@@ -133,7 +134,7 @@ class _AlertForEditDeleteState extends State<AlertForEditDelete> {
   editData() async {
     ApiServices apiServices = ApiServices();
     await apiServices.postDataWithTokenV2(
-      url: "http://192.168.1.45:8000/api/v1/admin/store/", 
+      url: ApiUrl.baseUrl + "v1/admin/store/", 
       parameters: {
         "judul" : widget.judulController.text,
         "konten" : widget.kontenController.text,
